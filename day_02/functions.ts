@@ -90,3 +90,46 @@ console.log(average(numArr));
 console.log(average(emptyArr));
 console.log(clamp(3.4, 4.32, 9.32));
 console.log(rangeGenerator(2.1, 19.5, 2.5));
+
+function capitalize(str: string): string {
+  return str.length !== 0 ? str.charAt(0).toUpperCase() + str.slice(1) : "";
+}
+
+function capitalizeAll(str: string): string {
+  if (str.length === 0) {
+    return "";
+  }
+  if (str.length === 1) {
+    return capitalize(str);
+  }
+  const str_splits: string[] = str.split(" ");
+  let result: string = "";
+  let i = 0;
+  const split_len: number = str_splits.length;
+  while (i < split_len) {
+    result += capitalize(str_splits[i]) + " ";
+    i += 1;
+  }
+  return result;
+}
+
+function safeSubstr(str: string, start: number, end?: number): string {
+  const len = str.length;
+  let safeStart = Math.max(0, Math.min(len - 1, start));
+  let safeEnd = end === undefined ? len : Math.min(end, len);
+  if (safeStart > safeEnd) {
+    return "";
+  }
+  return str.substring(safeStart, safeEnd);
+}
+
+let str_01 = "hello world";
+let str_02 = "";
+let str_03 = "a";
+console.log(capitalize(str_01));
+console.log(capitalize(str_02));
+console.log(capitalize(str_03));
+console.log(capitalizeAll(str_01));
+console.log(safeSubstr(str_01, 3));
+console.log(safeSubstr(str_01, 5, 2));
+console.log(safeSubstr(str_03, 0, 1));
